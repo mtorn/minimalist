@@ -1,27 +1,29 @@
 /*
-minimalist.css
-version 0.0.1
+ * minimalist.css
+ * version 0.0.1
 
-Simple Bootstrap style grid system
+ * A simple Bootstrap style grid system
 
-The MIT License (MIT)
-(c) 2015 Mihail Tornberg
-*/
+ * License: MIT http://opensource.org/licenses/mit-license.php
+ * (c) 2015 Mihail Tornberg
+ */
 
-//max width for container
+//max width for .container
 $width: 960px;
 
-//amount of columns + 1
-$columns: 13;
+//amount of columns
+$columns: 12;
 
-$margin-left: 1%;
+$margin-left:   1%;
 $margin-bottom: 5px;
-
-$tablet-width: 768px;
-$desktop-width: 1024px;
+$padding-left:  15px;
+$padding-right: 15px;
 
 //<420px = 100% width
-$small-phone: 420px;
+$small-phone-width: 420px;
+$tablet-width:      768px;
+$desktop-width:     1024px;
+
 
 .container {
 	position: relative;
@@ -37,7 +39,7 @@ $small-phone: 420px;
 }
 
 .row {
-	margin-left: -2%;
+	margin-left: -$margin-left;
 }
 
 .container:after, .row:after {
@@ -48,7 +50,7 @@ $small-phone: 420px;
 
 
 //phone
-@for $i from 1 to $columns {
+@for $i from 1 to $columns + 1 {
 	$grid: ($i/12) * 100% - $margin-left;
 	.phone-#{$i} {
 		width: $grid;
@@ -57,7 +59,7 @@ $small-phone: 420px;
 
 //tablet
 @media (min-width: #{$tablet-width}) {
-	@for $i from 1 to $columns {
+	@for $i from 1 to $columns + 1 {
 		$grid: ($i/12) * 100% - $margin-left;
 		.tablet-#{$i} {
 			width: $grid;
@@ -67,7 +69,7 @@ $small-phone: 420px;
 
 //desktop
 @media (min-width: #{$desktop-width}) {
-	@for $i from 1 to $columns {
+	@for $i from 1 to $columns + 1 {
 		$grid: ($i/12) * 100% - $margin-left;
 		.desktop-#{$i} {
 			width: $grid;
@@ -77,16 +79,16 @@ $small-phone: 420px;
 
 .phone-1, .phone-2, .phone-3, .phone-4, .phone-5, .phone-6, .phone-7, .phone-8, .phone-9, .phone-10, .phone-11, .phone-12, .tablet-1, .tablet-2, .tablet-3, .tablet-4, .tablet-5, .tablet-6, .tablet-7, .tablet-8, .tablet-9, .tablet-10, .tablet-11, .tablet-12, .desktop-1, .desktop-2, .desktop-3, .desktop-4, .desktop-5, .desktop-6, .desktop-7, .desktop-8, .desktop-9, .desktop-10, .desktop-11, .desktop-12 {
 	float: left;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: $padding-left;
+	padding-right: $padding-right;
 	margin-left: $margin-left;
 	margin-bottom: $margin-bottom;
 	box-sizing: border-box;
 }
 
 //offset
-@media (min-width: #{$small-phone}) {
-	@for $i from 1 to $columns {
+@media (min-width: #{$small-phone-width}) {
+	@for $i from 1 to $columns + 1 {
 		$grid: ($i/12) * 100%+$margin-left;
 		.offset-#{$i} {
 			margin-left: $grid;
@@ -106,7 +108,7 @@ $small-phone: 420px;
 }
 
 //force 100% width for too small resolutions
-@media (max-width: $small-phone) {
+@media (max-width: $small-phone-width) {
 	.phone-1, .phone-2, .phone-3, .phone-4, .phone-5, .phone-6, .phone-7, .phone-8, .phone-9, .phone-10, .phone-11, .phone-12 {
 		$width: 100% - $margin-left;
 		width: $width;
