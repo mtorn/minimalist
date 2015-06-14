@@ -29,7 +29,7 @@ $desktop-width:     1024px;
 	position: relative;
 	margin: 0 auto;
 	padding: 0 10px;
-	@media (min-width: #{$tablet-width}) {
+	@media (min-width: $tablet-width) {
 		padding: 0;
 		width: 85%;
 	}
@@ -51,16 +51,16 @@ $desktop-width:     1024px;
 
 //phone
 @for $i from 1 to $columns + 1 {
-	$grid: ($i/12) * 100% - $margin-left;
+	$grid: ($i/$columns) * 100% - $margin-left;
 	.phone-#{$i} {
 		width: $grid;
 	}
 }
 
 //tablet
-@media (min-width: #{$tablet-width}) {
+@media (min-width: $tablet-width) {
 	@for $i from 1 to $columns + 1 {
-		$grid: ($i/12) * 100% - $margin-left;
+		$grid: ($i/$columns) * 100% - $margin-left;
 		.tablet-#{$i} {
 			width: $grid;
 		}
@@ -68,16 +68,16 @@ $desktop-width:     1024px;
 }
 
 //desktop
-@media (min-width: #{$desktop-width}) {
+@media (min-width: $desktop-width) {
 	@for $i from 1 to $columns + 1 {
-		$grid: ($i/12) * 100% - $margin-left;
+		$grid: ($i/$columns) * 100% - $margin-left;
 		.desktop-#{$i} {
 			width: $grid;
 		}
 	}
 }
 
-.phone-1, .phone-2, .phone-3, .phone-4, .phone-5, .phone-6, .phone-7, .phone-8, .phone-9, .phone-10, .phone-11, .phone-12, .tablet-1, .tablet-2, .tablet-3, .tablet-4, .tablet-5, .tablet-6, .tablet-7, .tablet-8, .tablet-9, .tablet-10, .tablet-11, .tablet-12, .desktop-1, .desktop-2, .desktop-3, .desktop-4, .desktop-5, .desktop-6, .desktop-7, .desktop-8, .desktop-9, .desktop-10, .desktop-11, .desktop-12 {
+%divstyle {
 	float: left;
 	padding-left: $padding-left;
 	padding-right: $padding-right;
@@ -86,17 +86,38 @@ $desktop-width:     1024px;
 	box-sizing: border-box;
 }
 
+@for $i from 1 to $columns + 1 {
+	.phone-#{$i}, .desktop-#{$i}, .tablet-#{$i} {
+		@extend %divstyle;
+	}
+	
+}
+
 //offset
-@media (min-width: #{$small-phone-width}) {
+@media (min-width: $small-phone-width) {
 	@for $i from 1 to $columns + 1 {
-		$grid: ($i/12) * 100%+$margin-left;
+		$grid: ($i/$columns) * 100%+$margin-left;
 		.offset-#{$i} {
 			margin-left: $grid;
 		}
 	}
 }
 
+%small-phone-div {
+	@media (max-width: $small-phone-width) {
+		$width: 100% - $margin-left;
+		width: $width;
+	}
+}
 
+//force 100% width for too small resolutions
+@for $i from 1 to $columns + 1 {
+	.phone-#{$i} {
+		@extend %small-phone-div;
+	}
+}
+
+//helper classes
 .full-width {
 	width: 100%;
 }
@@ -107,10 +128,13 @@ $desktop-width:     1024px;
 	float: left;
 }
 
-//force 100% width for too small resolutions
-@media (max-width: $small-phone-width) {
-	.phone-1, .phone-2, .phone-3, .phone-4, .phone-5, .phone-6, .phone-7, .phone-8, .phone-9, .phone-10, .phone-11, .phone-12 {
-		$width: 100% - $margin-left;
-		width: $width;
+.hidden-phone {
+	@media (max-width: $tablet-width - 1px) {
+		display:none;
+	}
+}
+.hidden-tablet {
+	@media (max-width: $desktop-width - 1px) {
+		display:none;
 	}
 }

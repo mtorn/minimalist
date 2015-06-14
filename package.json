@@ -5,5 +5,32 @@
     "grunt": "^0.4.5",
     "grunt-sass": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1"
-  }
+  },
+  "description": "A simple CSS grid system",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt-sass": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt": "^0.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtorn/minimalist.git"
+  },
+  "keywords": [
+    "sass",
+    "grid-system",
+    "responsive-grid-system",
+    "front-end",
+    "css"
+  ],
+  "author": "Mihail Tornberg <mihailtornberg@gmail.com> (http://mihailtornberg.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mtorn/minimalist/issues"
+  },
+  "homepage": "https://github.com/mtorn/minimalist#readme"
 }
